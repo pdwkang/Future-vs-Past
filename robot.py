@@ -5,7 +5,7 @@ from plant import Plant;
 class Robot(Plant):
 	def __init__(self, screen, square,game_settings):
 		self.shoot_speed = 0;
-		self.health = 3;
+		self.health = 10;
 		
 		self.image = pygame.image.load('images/robot-1.png');
 		self.image = pygame.transform.scale(self.image, (140,105));
@@ -27,7 +27,7 @@ class Robot(Plant):
 			self.image = pygame.image.load('./images/robot-3.png')
 			self.image = pygame.transform.scale(self.image, (130,105));		
 		else: 
-			self.rect.x += 7
+			self.rect.x += 2
 			if self.rect.x % 3 == 1:
 				self.image = pygame.image.load('./images/robot-2.png')
 				self.image = pygame.transform.scale(self.image, (130,105));		

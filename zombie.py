@@ -9,11 +9,25 @@ class Zombie(Sprite):
 		self.health = game_settings.zombie_health;
 		self.level = level
 		self.image = pygame.image.load('./images/dk1.png')
+		self.yard_row = randint(0,4);
+		self.name = ''
 		if self.level==2:
 			self.image = pygame.image.load('./images/wk1.png')
 			self.image = pygame.transform.scale(self.image,(180,140));
-			self.speed = 8
-			self.health = 10
+			self.speed = self.speed + 3
+			self.health = 5 * self.health
+		elif self.level==3:
+			self.image = pygame.image.load('./images/yk1.png')
+			self.image = pygame.transform.scale(self.image,(180,130));
+			self.speed = self.speed * 4
+			self.health = self.health * 10
+		elif self.level==4:
+			self.image = pygame.image.load('./images/boss1.png')
+			self.image = pygame.transform.scale(self.image,(393,414));
+			self.speed = 1
+			self.health = self.health * 300
+			self.yard_row = 2
+			self.name = 'boss'
 		else:
 			self.image = pygame.transform.scale(self.image,(110,120));
 		# self.image = pygame.transform.scale(self.image,(80,148));
@@ -21,7 +35,7 @@ class Zombie(Sprite):
 		self.screen = screen;
 		self.screen_rect = screen.get_rect();
 
-		self.yard_row = randint(0,4);
+		
 		self.rect.centery = game_settings.squares["rows"][self.yard_row] + 50
 		self.rect.right = self.screen_rect.right;
 		game_settings.zombie_in_row[self.yard_row] += 1;
@@ -35,7 +49,10 @@ class Zombie(Sprite):
 			if self.level==2:
 				self.image = pygame.image.load('./images/wk3.png')
 				self.image = pygame.transform.scale(self.image,(180,140));
-			else:
+			elif self.level==3:
+				self.image = pygame.image.load('./images/yk3.png')
+				self.image = pygame.transform.scale(self.image,(180,130));				
+			elif self.level==1:
 				self.image = pygame.image.load('./images/dk3.png')
 				self.image = pygame.transform.scale(self.image,(180,140));
 				self.rect.centery = self.game_settings.squares["rows"][self.yard_row] + 20
@@ -47,14 +64,20 @@ class Zombie(Sprite):
 					if self.level==2:
 						self.image = pygame.image.load('./images/wk1-2.png')
 						self.image = pygame.transform.scale(self.image,(180,140));
-					else:
+					elif self.level==3:
+						self.image = pygame.image.load('./images/yk1-2.png')
+						self.image = pygame.transform.scale(self.image,(180,130));	
+					elif self.level==1:
 						self.image = pygame.image.load('./images/dk1-2.png')
 						self.image = pygame.transform.scale(self.image,(110,120));
 				else:
 					if self.level==2:
 						self.image = pygame.image.load('./images/wk1.png')
 						self.image = pygame.transform.scale(self.image,(180,140));
-					else:
+					elif self.level==3:
+						self.image = pygame.image.load('./images/yk1.png')
+						self.image = pygame.transform.scale(self.image,(180,130));	
+					elif self.level==1:
 						self.image = pygame.image.load('./images/dk1.png')
 						self.image = pygame.transform.scale(self.image,(110,120));
 
@@ -65,7 +88,10 @@ class Zombie(Sprite):
 					if self.level==2:
 						self.image = pygame.image.load('./images/wk2-2.png')
 						self.image = pygame.transform.scale(self.image,(180,140));
-					else:
+					elif self.level==3:
+						self.image = pygame.image.load('./images/yk2-2.png')
+						self.image = pygame.transform.scale(self.image,(180,130));	
+					elif self.level==1:
 						self.image = pygame.image.load('./images/dk2-2.png')
 						self.image = pygame.transform.scale(self.image,(140,120));
 				else:
@@ -74,7 +100,10 @@ class Zombie(Sprite):
 					if self.level==2:
 						self.image = pygame.image.load('./images/wk2.png')
 						self.image = pygame.transform.scale(self.image,(180,140));
-					else:
+					elif self.level==3:
+						self.image = pygame.image.load('./images/yk2.png')
+						self.image = pygame.transform.scale(self.image,(180,130));	
+					elif self.level==1:
 						self.image = pygame.image.load('./images/dk2.png')
 						self.image = pygame.transform.scale(self.image,(140,120));
 
@@ -85,5 +114,7 @@ class Zombie(Sprite):
 		self.health -= damage;
 		if self.level == 1 and self.health > 1:
 			self.x += 18;
-		elif self.health > 1:
-			self.x += 28;
+		elif self.level == 2 and self.health > 1:
+			self.x += 10;
+		if self.level ==4:
+			print self.health
