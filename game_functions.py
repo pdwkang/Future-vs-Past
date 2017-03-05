@@ -15,6 +15,8 @@ def remove_plant_in_square(square, plants):
 			# if plant.name=='peashooter':
 			plants.remove(plant);
 game_log = ''
+
+
 def check_events(screen, game_settings,squares,plants,bullets,icons,tick):
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -40,6 +42,9 @@ def check_events(screen, game_settings,squares,plants,bullets,icons,tick):
 							remove_plant_in_square(square, plants)
 							plants.add(Peashooter(screen,square,game_settings));
 							game_settings.total_sun -= 50
+							gunner_sound = pygame.mixer.Sound('./images/gunner.wav');
+							gunner_sound.play();
+
 						elif(game_settings.chosen_plant == 2 and game_settings.total_sun >= 200):
 							for plant in plants:
 								if plant.square == square:
@@ -47,24 +52,32 @@ def check_events(screen, game_settings,squares,plants,bullets,icons,tick):
 										plants.remove(plant);
 										plants.add(Gatling(screen,square,game_settings));
 										game_settings.total_sun -= 200
+										gunner_sound = pygame.mixer.Sound('./images/gunner.wav');
+										gunner_sound.play();
 						elif(game_settings.chosen_plant == 3 and game_settings.total_sun >= 1000):
 							for plant in plants:
 								if plant.square == square:
 									if plant.name=='gatling':
 										plants.remove(plant);
 										plants.add(Gunner3(screen,square,game_settings));
-										game_settings.total_sun -= 1000							
+										game_settings.total_sun -= 1000	
+										gunner_sound = pygame.mixer.Sound('./images/gunner3.wav');
+										gunner_sound.play();						
 						elif(game_settings.chosen_plant == 4 and game_settings.total_sun >= 5200):
 							for plant in plants:
 								if plant.square == square:
 									if plant.name=='gunner3':
 										plants.remove(plant);
 										plants.add(Gunner4(screen,square,game_settings));
-										game_settings.total_sun -= 5200																	
+										game_settings.total_sun -= 5200	
+										gunner_sound = pygame.mixer.Sound('./images/gunner4.wav');
+										gunner_sound.play();																
 						elif(game_settings.chosen_plant == 5 and game_settings.total_sun >= 500):
 							remove_plant_in_square(square, plants)
 							plants.add(Sunflower(screen,square,game_settings));	
 							game_settings.total_sun -= 500
+							gunner_sound = pygame.mixer.Sound('./images/mineral.wav');
+							gunner_sound.play();
 						elif(game_settings.chosen_plant == 6 and game_settings.total_sun >= (30+int(tick/50))):
 							plants.add(Robot(screen,square,game_settings));		
 							game_settings.total_sun -= (30+int(tick/50))
@@ -122,6 +135,9 @@ def update_screen(screen,game_settings,background,zombies,squares,plants,bullets
 		should_make_sun = (time.time() - plant.last_sun) > plant.sun_speed;
 		if should_shoot and in_my_row and can_shoot:
 			bullets.add(Bullet(screen,plant,tick));
+			# if not plant.name == 'gunner4':
+				# fire_sound = pygame.mixer.Sound('./images/fire.wav');
+				# fire_sound.play();
 			plant.last_shot = time.time();
 
 		if can_make_sun and should_make_sun:

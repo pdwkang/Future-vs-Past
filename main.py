@@ -40,14 +40,20 @@ for i in range(0,5):
 
 def run_game():
 	tick = 0;
+	bg_sound = pygame.mixer.Sound('./images/bg.wav')
+	bg_sound.play(-1);	
 	# zombies.add(Zombie(screen,game_settings,4));
 	while 1:
 		gf.check_events(screen,game_settings, squares, plants,bullets,icons,tick);
 		if game_settings.game_active:
 			tick += 1;
-			if tick > 7000:
-				if tick % 600:
+			if tick > 6200:
+				if tick % 300 ==0:
 					zombies.add(Zombie(screen,game_settings,4));
+				if tick % 400 ==0:
+					zombies.add(Zombie(screen,game_settings,4));
+				if tick % 1000 ==0:
+					zombies.add(Zombie(screen,game_settings,4));	
 				if tick % 5 == 0:
 					zombies.add(Zombie(screen,game_settings,3));				
 				if tick % 4 == 0:
@@ -144,6 +150,8 @@ def run_game():
 							if plant.health <= 0:
 								plants.remove(plant);
 							# start the zombie march again
+					elif zombie.name =='boss':
+						plants.remove(plant);
 			gf.update_screen(screen,game_settings,background,zombies,squares,plants,bullets,tick,icons);		
 		pygame.display.flip();
 

@@ -13,7 +13,7 @@ class Settings():
 		self.zombies_killed = 0;
 		
 		self.total_sun = 0;
-		self.total_sun = 51239581;
+		# self.total_sun = 51239581;
 
 		# square stuff
 		self.squares = {

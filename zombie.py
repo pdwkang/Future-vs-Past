@@ -1,7 +1,7 @@
 import pygame;
 from pygame.sprite import Sprite;
 from random import randint;
-
+# from sounds import sounds
 class Zombie(Sprite):
 	def __init__(self, screen, game_settings, level):
 		super(Zombie,self).__init__();
@@ -24,9 +24,12 @@ class Zombie(Sprite):
 		elif self.level==4:
 			self.image = pygame.image.load('./images/boss1.png')
 			self.image = pygame.transform.scale(self.image,(393,414));
-			self.speed = 1
-			self.health = self.health * 300
-			self.yard_row = 2
+			
+			self.health = self.health * 170
+			temp_tuple=(1,3)
+			self.yard_row = temp_tuple[(randint(0,1))]
+			temp_tuple2 = (0.5, 0.7, 0.9, 1, 1.1, 1.3, 1.5)
+			self.speed = temp_tuple2[(randint(0,6))]
 			self.name = 'boss'
 		else:
 			self.image = pygame.transform.scale(self.image,(110,120));
@@ -45,6 +48,9 @@ class Zombie(Sprite):
 		self.started_eating = 0;
 		self.damage_time = 2;
 	def update_me(self):
+		if self.level ==4 and self.health <= 300:
+			self.image = pygame.image.load('./images/boss1-2.png')
+			self.image = pygame.transform.scale(self.image,(393,414));
 		if self.health <= 1:
 			if self.level==2:
 				self.image = pygame.image.load('./images/wk3.png')
@@ -112,9 +118,14 @@ class Zombie(Sprite):
 
 	def hit(self, damage):
 		self.health -= damage;
+		ouch_sound = pygame.mixer.Sound('./images/attacked.wav')
+		ouch_sound.play();
+		if self.health == 1:
+			bg_music = pygame.mixer.Sound('./images/ouch.wav');
+			bg_music.play();
 		if self.level == 1 and self.health > 1:
 			self.x += 18;
 		elif self.level == 2 and self.health > 1:
 			self.x += 10;
-		if self.level ==4:
+		if self.level == 4:
 			print self.health

@@ -5,7 +5,7 @@ import time
 class Peashooter(Plant):
 	def __init__(self, screen, square, game_settings):
 		self.shoot_speed = 1.5;
-		self.health = 5;
+		self.health = 3;
 		self.image = pygame.image.load('images/gunner1-1.png');
 		self.image = pygame.transform.scale(self.image, (73,105));
 		self.screen = screen;
