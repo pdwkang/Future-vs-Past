@@ -12,7 +12,7 @@ from sunflower import Sunflower;
 pygame.init();
 game_settings = Settings();
 screen = pygame.display.set_mode(game_settings.screen_size);
-pygame.display.set_caption("DC PvZ clone");
+pygame.display.set_caption("Future vs Past");
 background = Background(game_settings);
 peashooter_icon = Plant_Icon(game_settings,'gunner1-icon.png',1, True);
 gatling_icon = Plant_Icon(game_settings,'gunner2-icon.png',2, False);
@@ -42,6 +42,10 @@ def run_game():
 	tick = 0;
 	bg_sound = pygame.mixer.Sound('./images/bg.wav')
 	bg_sound.play(-1);	
+	# zombies.add(Zombie(screen,game_settings,4));
+	# zombies.add(Zombie(screen,game_settings,4));
+	# zombies.add(Zombie(screen,game_settings,4));
+	# zombies.add(Zombie(screen,game_settings,4));
 	# zombies.add(Zombie(screen,game_settings,4));
 	while 1:
 		gf.check_events(screen,game_settings, squares, plants,bullets,icons,tick);

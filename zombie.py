@@ -11,28 +11,7 @@ class Zombie(Sprite):
 		self.image = pygame.image.load('./images/dk1.png')
 		self.yard_row = randint(0,4);
 		self.name = ''
-		if self.level==2:
-			self.image = pygame.image.load('./images/wk1.png')
-			self.image = pygame.transform.scale(self.image,(180,140));
-			self.speed = self.speed + 3
-			self.health = 5 * self.health
-		elif self.level==3:
-			self.image = pygame.image.load('./images/yk1.png')
-			self.image = pygame.transform.scale(self.image,(180,130));
-			self.speed = self.speed * 4
-			self.health = self.health * 10
-		elif self.level==4:
-			self.image = pygame.image.load('./images/boss1.png')
-			self.image = pygame.transform.scale(self.image,(393,414));
-			
-			self.health = self.health * 170
-			temp_tuple=(1,3)
-			self.yard_row = temp_tuple[(randint(0,1))]
-			temp_tuple2 = (0.5, 0.7, 0.9, 1, 1.1, 1.3, 1.5)
-			self.speed = temp_tuple2[(randint(0,6))]
-			self.name = 'boss'
-		else:
-			self.image = pygame.transform.scale(self.image,(110,120));
+
 		# self.image = pygame.transform.scale(self.image,(80,148));
 		self.rect = self.image.get_rect();
 		self.screen = screen;
@@ -47,6 +26,28 @@ class Zombie(Sprite):
 		self.moving = True;
 		self.started_eating = 0;
 		self.damage_time = 2;
+		if self.level==2:
+			self.image = pygame.image.load('./images/wk1.png')
+			self.image = pygame.transform.scale(self.image,(180,140));
+			self.speed = self.speed + 3
+			self.health = 4 * self.health
+		elif self.level==3:
+			self.image = pygame.image.load('./images/yk1.png')
+			self.image = pygame.transform.scale(self.image,(180,130));
+			self.speed = self.speed * 4
+			self.health = self.health * 8
+		elif self.level==4:
+			self.image = pygame.image.load('./images/boss1.png')
+			self.image = pygame.transform.scale(self.image,(393,414));
+			self.health = self.health * 150
+			temp_tuple=(1,3)
+			self.yard_row = temp_tuple[(randint(0,1))]
+			temp_tuple2 = (0.5, 0.7, 0.9, 1, 1.3, 1.5, 2)
+			self.speed = temp_tuple2[(randint(0,6))]
+			self.name = 'boss'
+			# self.rect.right -= 500
+		else:
+			self.image = pygame.transform.scale(self.image,(110,120));		
 	def update_me(self):
 		if self.level ==4 and self.health <= 300:
 			self.image = pygame.image.load('./images/boss1-2.png')
