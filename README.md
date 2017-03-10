@@ -1,5 +1,3 @@
-###Future vs Past
-
 ####Python, Pygame
 
 [Demo Video](https://youtu.be/uUWaEBpFAoA)
